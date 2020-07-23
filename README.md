@@ -63,5 +63,5 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all m
+Laravel has the m 0-0 oster extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all m
 
