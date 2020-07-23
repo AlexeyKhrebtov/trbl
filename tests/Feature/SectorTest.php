@@ -21,12 +21,5 @@ class SectorTest extends TestCase
         $response = $this->get(route('sectors.index'));
         $response->assertStatus(302);
     }
-    
-    /**
-     * @test
-     */
-    public function auth_user_can_read_all_sectors()
-    {
-        
-    }
+
 }
