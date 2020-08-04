@@ -100,7 +100,6 @@
                     iconAnchor: [12, 40],
                     shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
                     shadowAnchor: [14, 46]
-
                 }),
 
                 me: {
