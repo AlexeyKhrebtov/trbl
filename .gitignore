@@ -11,6 +11,8 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 
+htdocs
+
 # Created by https://www.toptal.com/developers/gitignore/api/git,laravel,phpstorm
 # Edit at https://www.toptal.com/developers/gitignore?templates=git,laravel,phpstorm
 
