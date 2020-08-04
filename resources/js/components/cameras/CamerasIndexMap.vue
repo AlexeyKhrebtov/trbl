@@ -26,6 +26,7 @@
                     <l-marker v-for="marker in markers" :key="marker.id"
                               :lat-lng="marker.coords"
                               :name="''+marker.id"
+                              :icon="iconCamera"
                               ref="cameraMarkersRef"
                     >
                         <l-tooltip>{{ marker.title }}</l-tooltip>
@@ -92,6 +93,16 @@
 
                 ],
                 url_rzd: 'https://{s}.tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png',
+
+                iconCamera: L.icon({
+                    iconUrl: '/images/vendor/leaflet/dist/camera_green.png',
+                    iconSize: [25, 37],
+                    iconAnchor: [12, 40],
+                    shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+                    shadowAnchor: [14, 46]
+
+                }),
+
                 me: {
                     center: [0,0],
                     visible: true,
