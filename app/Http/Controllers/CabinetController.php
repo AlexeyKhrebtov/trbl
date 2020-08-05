@@ -29,7 +29,9 @@ class CabinetController extends Controller
         $cabinet = new Cabinet(); // пустая болванка для формы
         $sectors = \App\Sector::orderBy('title')->get();
 
-        return view('cabinets.create', compact('cabinet', 'sectors'));
+        $cabinets = Cabinet::all();
+
+        return view('cabinets.create', compact('cabinet', 'sectors', 'cabinets'));
     }
 
     /**

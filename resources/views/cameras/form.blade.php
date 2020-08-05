@@ -58,7 +58,7 @@
 <div class="col-md-6">
     <div class="form-group">
         <form-map
-            v-bind:coords="{lat: {{$camera->lat ?? 59.749311}}, lng: {{$camera->lng ?? 30.615230}}}" candragmarker></form-map>
+            v-bind:coords="{lat: {{$camera->lat ?? 59.749311}}, lng: {{$camera->lng ?? 30.615230}}}"  v-bind:cabinets='@json($cabinets)' v-bind:cameras='@json($cameras)' candragmarker></form-map>
     </div>
 
     <div class="form-row">

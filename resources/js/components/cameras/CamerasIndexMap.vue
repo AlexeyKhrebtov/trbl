@@ -97,9 +97,12 @@
                 iconCamera: L.icon({
                     iconUrl: '/images/vendor/leaflet/dist/camera_green.png',
                     iconSize: [25, 37],
-                    iconAnchor: [12, 40],
+                    iconAnchor: [13, 36],
                     shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
-                    shadowAnchor: [14, 46]
+                    shadowAnchor: [13, 41],
+                    tooltipAnchor: [0,-25],
+                    popupAnchor: [0,-30],
+
                 }),
 
                 me: {

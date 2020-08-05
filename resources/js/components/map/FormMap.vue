@@ -15,8 +15,6 @@
 
             <l-tile-layer :url="url_rzd" :attribution="attribution" layer-type="overlay" name="Железные дороги"></l-tile-layer>
 
-            <l-marker :lat-lng="markerStartPosition" :draggable=this.candragmarker @update:latLng="dragMarkers"></l-marker>
-
             <l-circle-marker
                 :lat-lng="me.center"
                 :radius="me.radius"
@@ -25,6 +23,25 @@
             >
                 <l-tooltip :content="me.tooltip"></l-tooltip>
             </l-circle-marker>
+
+            <l-marker v-for="cabinet in cabinets" :key="'cabinet_'+cabinet.id"
+                      :lat-lng="[cabinet.lat, cabinet.lng]"
+                      :name="''+cabinet.id"
+                      :icon="iconCabinet"
+                      ref="cabinetMarkersRef">
+                <l-tooltip>Шкаф {{ cabinet.title }}</l-tooltip>
+            </l-marker>
+
+            <l-marker v-for="camera in cameras" :key="'camera_'+camera.id"
+                      :lat-lng="[camera.lat, camera.lng]"
+                      :name="''+camera.id"
+                      :icon="iconCamera"
+                      ref="cameraMarkersRef">
+                <l-tooltip>Камера {{ camera.title }}</l-tooltip>
+            </l-marker>
+
+
+            <l-marker :lat-lng="markerStartPosition" :draggable=this.candragmarker @update:latLng="dragMarkers" :zIndexOffset="1000"></l-marker>
 
             <l-control position="topleft">
                 <button
@@ -50,6 +67,8 @@
         props: {
             coords: Object,
             candragmarker: Boolean,
+            cabinets: Array,
+            cameras: Array,
         },
         data() {
             return {
@@ -79,6 +98,25 @@
                 },
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 copy_coords: this.coords,
+
+                iconCabinet: L.icon({
+                    iconUrl: '/images/vendor/leaflet/dist/marker-icon-orange.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 40],
+                    tooltipAnchor: [0,-30],
+                    popupAnchor: [0,-30],
+                    shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+                    shadowAnchor: [12, 41]
+                }),
+
+                iconCamera: L.icon({
+                    iconUrl: '/images/vendor/leaflet/dist/camera_green.png',
+                    iconSize: [25, 37],
+                    iconAnchor: [13, 36],
+                    shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+                    shadowAnchor: [13, 41],
+                    tooltipAnchor: [0,-25],
+                }),
             }
         },
         computed: {

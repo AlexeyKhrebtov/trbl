@@ -41,7 +41,7 @@
 </div>
 <div class="col-md-6">
     <div class="form-group">
-        <form-map v-bind:coords="{lat: {{$cabinet->lat ?? 59.749311}}, lng: {{$cabinet->lng ?? 30.615230}}}" candragmarker></form-map>
+        <form-map v-bind:coords="{lat: {{$cabinet->lat ?? 59.749311}}, lng: {{$cabinet->lng ?? 30.615230}}}"  v-bind:cabinets='@json($cabinets)' candragmarker></form-map>
     </div>
 
     <div class="form-row">

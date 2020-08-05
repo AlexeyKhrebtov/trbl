@@ -29,7 +29,9 @@ class CameraController extends Controller
         $camera = new Camera(); // пустая болванка для формы
         $cabinets = \App\Cabinet::orderBy('title')->get();
 
-        return view('cameras.create', compact('camera', 'cabinets'));
+        $cameras = Camera::all();
+
+        return view('cameras.create', compact('camera', 'cabinets', 'cameras'));
     }
 
     /**
