@@ -23,6 +23,7 @@
                 <l-marker v-for="marker in markers" :key="marker.id"
                           :lat-lng="marker.coords"
                           :name="''+marker.id"
+                          :icon="iconCabinet"
                           ref="cabinetMarkersRef"
                 >
                     <l-tooltip>{{ marker.title }}</l-tooltip>
@@ -82,6 +83,17 @@
                 mapOptions: {
                     zoomSnap: 0.5
                 },
+
+                iconCabinet: L.icon({
+                    iconUrl: '/images/vendor/leaflet/dist/marker-icon-orange.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 40],
+                    tooltipAnchor: [0,-30],
+                    popupAnchor: [0,-30],
+                    shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+                    shadowAnchor: [12, 41]
+                }),
+
                 // tile-layer option
                 url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
