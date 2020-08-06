@@ -69,7 +69,10 @@ class CabinetController extends Controller
     public function edit(Cabinet $cabinet)
     {
         $sectors = \App\Sector::orderBy('title')->get();
-        return view('cabinets.edit', compact('cabinet', 'sectors'));
+
+        $cabinets = Cabinet::all();
+
+        return view('cabinets.edit', compact('cabinet', 'sectors', 'cabinets'));
     }
 
     /**

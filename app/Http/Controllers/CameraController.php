@@ -70,7 +70,9 @@ class CameraController extends Controller
     {
         $cabinets = \App\Cabinet::orderBy('title')->get();
 
-        return view('cameras.edit', compact('camera','cabinets'));
+        $cameras = Camera::all();
+
+        return view('cameras.edit', compact('camera','cabinets', 'cameras'));
     }
 
     /**
