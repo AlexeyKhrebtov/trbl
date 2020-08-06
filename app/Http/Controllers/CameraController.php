@@ -99,6 +99,7 @@ class CameraController extends Controller
      */
     public function destroy(Camera $camera)
     {
-        //
+        $camera->delete();
+        return redirect()->action('CameraController@index')->with('success', 'Камера удалена');
     }
 }

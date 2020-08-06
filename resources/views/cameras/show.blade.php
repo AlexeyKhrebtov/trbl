@@ -61,7 +61,11 @@
         </div>
 
         <div class="pull-right">
-            <a href="#" class="btn btn-danger disabled">Удалить камеру</a>
+            <form action="{{ route('cameras.destroy', $camera) }}" method="post">
+                @method('DELETE')
+                @csrf
+                <input type="submit" class="btn btn-danger" onclick="return confirm('Удалить камеру?')" value="Удалить камеру">
+            </form>
         </div>
     </div>
 @endsection
