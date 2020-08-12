@@ -22,6 +22,9 @@ Route::middleware(['auth'])->group(function (){
         'sectors' => 'SectorController',
         'cabinets' => 'CabinetController',
         'cameras' => 'CameraController',
+        'equipments' => 'EquipmentController',
+        'works' => 'WorkController',
+        'sheets' => 'SheetController',
     ]);
 
     Route::get('summaries', 'SummaryController')->name('summaries');

@@ -11,6 +11,7 @@ docker-compose run --rm app php artisan ...
 Создание сущности
 ```shell script
 docker-compose run --rm app php artisan make:model Market -a
+docker-compose run --rm app php artisan make:request StoreEquipmentRequest
 docker-compose run --rm app php artisan make:model Market -fms --api
 docker-compose run --rm app php artisan make:controller API/MarketController --api -m Market
 docker-compose run --rm app php artisan make:test MarketTest
@@ -33,6 +34,8 @@ docker-compose run --rm npm npm install leaflet vue2-leaflet --save
 Миграция (полностью с 0, с заполнением данных)
 ```shell script
 docker-compose run --rm app php artisan migrate:fresh --seed
+docker-compose run --rm app php artisan db:seed --class=UserSeeder
+
 ```
 
 Для PHPStorm

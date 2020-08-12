@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
              SectorSeeder::class, // создать участки
              CabinetSeeder::class, // шкафы
              CameraSeeder::class, // камеры
+             EquipmentSeeder::class, // оборудование
+             WorkSeeder::class, // список выполняемых работ с оборудованием
          ]);
     }
 }
