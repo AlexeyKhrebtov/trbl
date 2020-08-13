@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h4 class="mt-4 mb-5 text-center">Редактирование камеры</h4>
+        <h4 class="mt-4 mb-5 text-center">Редактирование оборудования</h4>
         <form action="{{ route('equipments.update', ['equipment' => $equipment]) }}" method="POST" enctype="multipart/form-data">
             @method('PATCH')
             <div class="row">

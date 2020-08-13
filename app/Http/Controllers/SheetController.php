@@ -15,7 +15,7 @@ class SheetController extends Controller
      */
     public function index()
     {
-        $sheets = Sheet::all();
+        $sheets = Sheet::withCount('details')->get();
         return view('sheets.index', compact('sheets'));
     }
 
@@ -61,7 +61,12 @@ class SheetController extends Controller
      */
     public function show(Sheet $sheet)
     {
-        return view('sheets.show', compact('sheet'));
+        // Для формы добавления нового оборудования в отчет
+        $detail = new \App\Detail(); // болванка для формы
+        $works = \App\Work::all();
+        $equipments = \App\Equipment::orderBy('title')->get();
+
+        return view('sheets.show', compact('sheet', 'detail', 'works', 'equipments'));
     }
 
     /**

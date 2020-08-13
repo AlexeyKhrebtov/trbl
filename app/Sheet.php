@@ -18,6 +18,12 @@ class Sheet extends Model
         return $this->belongsTo(Sector::class);
     }
 
+    // Привязанные детали отчета
+    public function details()
+    {
+        return $this->hasMany(Detail::class);
+    }
+
     // Преобразование поля "Статус"
     public function getStatusAttribute($attr)
     {

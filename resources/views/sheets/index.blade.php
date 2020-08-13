@@ -13,16 +13,21 @@
     </div>
 
     <div class="container">
-        <ul>
-            @forelse ($sheets as $sheet)
-                <li>
-                    {{ $sheet->number }}
-                    <a href="{{ route('sheets.show', $sheet) }}">show</a>
-                    <a href="{{ route('sheets.edit', $sheet) }}">edit</a>
-                </li>
-            @empty
-                <p>Нет ДВ</p>
-            @endforelse
-        </ul>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="list-group">
+                    @foreach ($sheets as $sheet)
+                        <a href="{{  route('sheets.show', $sheet) }}" class="list-group-item list-group-item-warning list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{ $sheet->number }}</h5>
+                                <small>#{{ $sheet->id }}</small>
+                            </div>
+                            <p class="mb-1">от {{ $sheet->date }} - {{ $sheet->status }}</p>
+                            <small>Наименований: {{ $sheet->details_count }}</small>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
