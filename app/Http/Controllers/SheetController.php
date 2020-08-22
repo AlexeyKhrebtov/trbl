@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSheetRequest;
+use App\Sector;
 use App\Sheet;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,9 @@ class SheetController extends Controller
      */
     public function index()
     {
-        $sheets = Sheet::withCount('details')->get();
-        return view('sheets.index', compact('sheets'));
+        $sectors = Sector::all();
+        $sheets = Sheet::with('details')->get();
+        return view('sheets.index', compact('sheets', 'sectors'));
     }
 
     /**
