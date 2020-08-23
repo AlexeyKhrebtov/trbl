@@ -27,5 +27,20 @@
                 </form>
             </div>
         </div>
+            <div class="col-sm mt-4 mt-sm-0">
+                <form action="{{ route('sheets.destroy', $sheet) }}" method="post">
+                    @method('DELETE')
+                    @csrf
+                    <fieldset class="border p-2 bg-white">
+                        <legend  class="w-auto">
+                            <i class="fas fa-exclamation-triangle fa-lg text-danger"></i>
+                        </legend>
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-danger" onclick="return confirm('Удалить ДВ со всеми данными?')" value="Удалить ДВ">
+                        </div>
+                    </fieldset>
+
+                </form>
+            </div>
     </div>
 @endsection

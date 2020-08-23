@@ -110,6 +110,7 @@ class SheetController extends Controller
      */
     public function destroy(Sheet $sheet)
     {
-        //
+        $sheet->delete();
+        return redirect()->action('SheetController@index')->with('success', 'ДВ удалена');
     }
 }
