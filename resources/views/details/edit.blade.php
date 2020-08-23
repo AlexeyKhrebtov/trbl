@@ -4,7 +4,7 @@
     <div class="container-lg">
         <h4 class="mt-4 mb-5 text-center">Редактирование оборудования в ДВ</h4>
         <div class="row">
-            <div class="col">
+            <div class="col-sm">
                 <form action="{{ route('details.update', $detail) }}" method="POST" enctype="multipart/form-data">
                     @method('PATCH')
                     <div class="row">
@@ -17,7 +17,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col">
+            <div class="col-sm mt-4 mt-sm-0">
                 <form action="{{ route('details.destroy', $detail) }}" method="post">
                     @method('DELETE')
                     @csrf
