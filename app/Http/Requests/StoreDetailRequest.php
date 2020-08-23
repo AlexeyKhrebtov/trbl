@@ -28,6 +28,7 @@ class StoreDetailRequest extends FormRequest
             'sheet_id' => 'required|integer|numeric|exists:sheets,id',
             'equipment_id' => 'required|integer|numeric|exists:equipment,id',
             'work_id' => 'required|integer|numeric|exists:work,id',
+            'comment' => 'nullable|string',
         ];
     }
 }

@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col">
     <div class="form-group">
         <label for="sheet_id">ДВ</label>
         <select name="sheet_id" class="custom-select @error('sheet_id') is-invalid @enderror" id="sheet_id" required>
@@ -38,6 +38,11 @@
         @error('work_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
     </div>
 
+    <div class="form-group">
+        <label for="comment">Комментарий</label>
+        <textarea class="form-control @error('comment') is-invalid @enderror" id="comment" name="comment" rows="4">{{ old('comment') ?? $detail->comment }}</textarea>
+        @error('comment')<div class="invalid-feedback">{{ $message }}</div>@enderror
+    </div>
 
 </div>
 @csrf

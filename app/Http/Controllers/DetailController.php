@@ -100,6 +100,8 @@ class DetailController extends Controller
      */
     public function destroy(Detail $detail)
     {
-        //
+        $sheet_id = $detail->sheet_id;
+        $detail->delete();
+        return redirect()->action('SheetController@show', $sheet_id)->with('success', 'Оборудование удалено');
     }
 }

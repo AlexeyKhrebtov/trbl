@@ -35,7 +35,11 @@ docker-compose run --rm npm npm install leaflet vue2-leaflet --save
 ```shell script
 docker-compose run --rm app php artisan migrate:fresh --seed
 docker-compose run --rm app php artisan db:seed --class=UserSeeder
+```
 
+Откат
+```shell script
+docker-compose run --rm app php artisan migrate:rollback --step=3
 ```
 
 Для PHPStorm

@@ -42,7 +42,7 @@
                                 @endif
                                 <tr>
                                     <th scope="row"><a href="{{  route('sheets.show', $sheet) }}">{{ $sheet->number }}</a></th>
-                                    <td>{{ $sheet->date }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($sheet->date)->format('d.m.Y') }}</td>
                                     <td>{{ $sheet->status }}</td>
                                     <td>
                                         @if (count($sheet->details))

@@ -23,7 +23,7 @@
                         <dt class="col-sm-2">Номер</dt>
                         <dd class="col-sm-10">{{ $sheet->number }}</dd>
                         <dt class="col-sm-2">Дата</dt>
-                        <dd class="col-sm-10">{{ $sheet->date }}</dd>
+                        <dd class="col-sm-10">{{ \Carbon\Carbon::parse($sheet->date)->format('d.m.Y') }}</dd>
                         <dt class="col-sm-2">Участок</dt>
                         <dd class="col-sm-10"><a href="{{route('sectors.show', $sheet->sector_id)}}">{{ $sheet->sector->title }} &nbsp; <i class="fas fa-external-link-alt"></i></a></dd>
                         <dt class="col-sm-2">Статус</dt>
@@ -39,6 +39,7 @@
                                     <th scope="col">Оборудование</th>
                                     <th scope="col">Модель</th>
                                     <th scope="col">Тип работ</th>
+                                    <th scope="col">Примечание</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -49,6 +50,7 @@
                                     <td>{{ $detail->equipment->title }}</td>
                                     <td><strong>{{ $detail->name }}</strong></td>
                                     <td>{{ $detail->work->title }}</td>
+                                    <td>{!! nl2br(e($detail->comment)) !!}</td>
                                     <td class=""><a href="{{ route('details.edit', $detail) }}">edit</a></td>
                                 </tr>
                             @empty
@@ -75,9 +77,9 @@
                     @endforeach
                 </select>
 
-                <div class="was-validated">
-                <label class="sr-only" for="inlineFormInputName2">Модель</label>
-                <input type="text" name="name" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="модель, камера №2.5.12" required>
+                <div class="was-validated p-0">
+                    <label class="sr-only" for="inlineFormInputName2">Модель</label>
+                    <input type="text" name="name" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="модель, камера №2.5.12" required>
                 </div>
 
                 <label class="sr-only" for="equipment_id">Тип работы</label>
@@ -88,9 +90,15 @@
                     @endforeach
                 </select>
 
+                <label class="sr-only" for="comment">Примечание</label>
+                <textarea name="comment" id="comment" cols="30" rows="2" placeholder="Примечание" class="form-control mb-2 mr-sm-2"></textarea>
+
                 @csrf
 
-                <button type="submit" class="btn btn-success mb-2">Добавить</button>
+                <button type="submit" class="btn btn-success mb-2">
+                    <i class="fa fa-plus text-light mr-1"></i>
+                    Добавить
+                </button>
             </form>
         </div>
 

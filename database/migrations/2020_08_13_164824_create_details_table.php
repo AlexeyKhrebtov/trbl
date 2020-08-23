@@ -19,6 +19,7 @@ class CreateDetailsTable extends Migration
             $table->foreignId('sheet_id')->constrained()->comment('Ссылка на ведомость');
             $table->foreignId('equipment_id')->constrained()->comment('Ссылка на оборудование');
             $table->foreignId('work_id')->constrained()->comment('Ссылка на тип работ');
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

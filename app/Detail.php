@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Detail extends Model
 {
-    protected $fillable = ['name', 'sheet_id', 'equipment_id', 'work_id'];
+    protected $fillable = ['name', 'sheet_id', 'equipment_id', 'work_id', 'comment'];
 
     public function equipment()
     {
