@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-6">
-                <h1 class="mt-1">Типы работ</h1>
+                <h4 class="mt-1">Типы работ</h4>
             </div>
             <div class="col-6">
                 <a href="{{ route('works.create') }}" class="btn btn-light float-right"><i class="fa fa-plus text-success"></i> Добавить тип работ</a>

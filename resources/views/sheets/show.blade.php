@@ -4,14 +4,14 @@
     <div class="container">
         <h1>{{ $sheet->number }}</h1>
 
-        <div class="row">
-            <div class="col-sm-4">
+        <div class="row mb-3">
+            <div class="col-12 col-sm-4">
                 <p class="lead">Дефектная ведомость</p>
             </div>
-            <div class="col-sm-4">
-                <a href="{{ route('sheets.index') }}" class="btn btn-outline-info mb-2" role="button"><i class="fas fa-undo"></i> Вернуться к списку ДВ</a>
+            <div class="col-6 col-sm-4">
+                <a href="{{ route('sheets.index') }}" class="btn btn-outline-info mb-2 bg-white" role="button"><i class="fas fa-undo"></i> Вернуться к списку ДВ</a>
             </div>
-            <div class="col-sm-4">
+            <div class="col-6 col-sm-4">
                 <a href="{{ route('sheets.edit', $sheet->id) }}" class="btn btn-outline-dark mb-2"  role="button"><i class="fas fa-edit"></i> Редактировать ДВ</a>
             </div>
         </div>
