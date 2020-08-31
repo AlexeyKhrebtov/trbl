@@ -1,6 +1,6 @@
 <div class="container">
     <div class="form-row">
-        <div class="form-group col-md-3 @if (\Route::current()->getName() == 'sheets.create')was-validated @endif">
+        <div class="form-group col-md-3 @if (\Route::current()->getName() == 'sheets.create' && !$errors->any())was-validated @endif">
             <label for="number">№ ДВ</label>
             <input type="text" class="form-control @error('number') is-invalid @enderror" name="number" value="{{ old('number') ?? $sheet->number }}" inputmode="numeric" placeholder="59515" id="number" maxlength="10" max="4294967294" required autofocus>
             @error('number')<div class="invalid-feedback">{{ $message }}</div>@enderror

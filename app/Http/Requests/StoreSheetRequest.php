@@ -23,11 +23,23 @@ class StoreSheetRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'number' => 'required|numeric|min:2|max:4294967294',
+        $rules = [
+            'number' => 'required|unique:sheets|numeric|min:2|max:4294967294',
             'date' => 'required|date',
             'sector_id' => 'required|integer|numeric|exists:sectors,id',
             'status' => 'required|integer|numeric',
         ];
+
+        if (in_array($this->method(), ['PUT', 'PATCH'])) {
+            $sheet = $this->route()->parameter('sheet');
+
+            // ВНИМАТЕЛЬНО!!! - тут исключаем текущий ID из проверки'
+            $rules['number'] = 'required|numeric|min:2|max:4294967294|unique:sheets,number,'. $sheet->id;
+
+            //    Rule::unique('cameras')->ignore($camera),
+
+        }
+
+        return $rules;
     }
 }
