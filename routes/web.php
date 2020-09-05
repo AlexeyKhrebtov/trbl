@@ -28,6 +28,8 @@ Route::middleware(['auth'])->group(function (){
         'details' => 'DetailController',
     ]);
 
+    Route::get('sheets/{dv}/export', 'SheetController@export')->name('export');
+
     Route::get('summaries', 'SummaryController')->name('summaries');
 });
 

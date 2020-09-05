@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSheetRequest;
 use App\Sector;
 use App\Sheet;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Reader\IReader;
 
 class SheetController extends Controller
 {
@@ -112,5 +117,65 @@ class SheetController extends Controller
     {
         $sheet->delete();
         return redirect()->action('SheetController@index')->with('success', 'ДВ удалена');
+    }
+
+    /**
+     * Экспорт в эксель
+     * @param Sheet $dv
+     * @return string
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     */
+    public function export(Sheet $dv)
+    {
+        $template_path = storage_path("app/public/dv_template.xls");
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($template_path);
+
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue("C19", $dv->number); // Номер документа
+        $sheet->setCellValue("E19", (new \Carbon\Carbon($dv->date))->format('m.d.Y')); // Дата составления
+        $sheet->setCellValue("D23", 'Скоростной участок магистрали Санкт-Петербург - Москва ОПО '. $dv->sector->title); // Местонахождение объекта
+
+        // Таблица со списком работ
+        $line = 45; // номер строки
+        $i = 1;
+
+        foreach ($dv->details as $detail) {
+
+            if ($i > 1) {
+                $cellValues = $sheet->rangeToArray('A'.$line.':K'.$line);
+                $line++;
+                $sheet->insertNewRowBefore($line,1); // insert row
+                $sheet->mergeCells('B'.$line.':C'.$line);
+                $sheet->mergeCells('I'.$line.':J'.$line);
+                for ($c = 'A'; $c != 'K'; ++$c) {
+                    $sheet->duplicateStyle($sheet->getStyle($c.($line-1)),$c.$line.':'.$c.$line);
+                    $sheet->fromArray($cellValues, null, 'A'.$line);
+                }
+// add code that show the issue here
+//                $cellValues = $sheet->rangeToArray('A'.$line.':K'.$line);
+//                $line++;
+//                $sheet->fromArray($cellValues, null, 'A'.$line);
+            }
+
+            $sheet->setCellValue("A".$line, $i); // № п.п
+            $cell_text = $detail->equipment->title;
+            $cell_text .= $detail->name;
+            $cell_text .= $detail->work->title;
+            $sheet->setCellValue("B".$line, $cell_text); // Наименование изделия, узла, агрегата, конструкции, подлежащего ремонту
+            $sheet->setCellValue("K".$line, $detail->comment); // Примечание
+
+            $i++;
+        }
+
+
+
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="file.xls"');
+
+        $writer->save('php://output');
+
+        return 'ok';
     }
 }

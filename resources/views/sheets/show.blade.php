@@ -29,6 +29,12 @@
                         <dt class="col-sm-2">Статус</dt>
                         <dd class="col-sm-10">{{ $sheet->status }}</dd>
                     </dl>
+                    <p class="mt-2">
+                        <a href="{{ route('export', $sheet) }}" target="_blank">
+                            <i class="fas fa-file-excel"></i>
+                            экспорт в Excel
+                        </a>
+                    </p>
                 </div>
                 <div class="col-md-8">
                     <div class="table-responsive">
