@@ -132,7 +132,7 @@ class SheetController extends Controller
 
         $sheet = $spreadsheet->getActiveSheet();
         $sheet->setCellValue("C19", $dv->number); // Номер документа
-        $sheet->setCellValue("E19", (new \Carbon\Carbon($dv->date))->format('m.d.Y')); // Дата составления
+        $sheet->setCellValue("E19", (new \Carbon\Carbon($dv->date))->format('d.m.Y')); // Дата составления
         $sheet->setCellValue("D23", 'Скоростной участок магистрали Санкт-Петербург - Москва ОПО '. $dv->sector->title); // Местонахождение объекта
 
         // Таблица со списком работ
@@ -158,8 +158,8 @@ class SheetController extends Controller
             }
 
             $sheet->setCellValue("A".$line, $i); // № п.п
-            $cell_text = $detail->equipment->title;
-            $cell_text .= $detail->name;
+            $cell_text = $detail->equipment->title . ' ';
+            $cell_text .= $detail->name . ' ';
             $cell_text .= $detail->work->title;
             $sheet->setCellValue("B".$line, $cell_text); // Наименование изделия, узла, агрегата, конструкции, подлежащего ремонту
             $sheet->setCellValue("K".$line, $detail->comment); // Примечание
@@ -167,12 +167,13 @@ class SheetController extends Controller
             $i++;
         }
 
-
-
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
 
+        $filename = "{$dv->status} {$dv->number} ДВ ОПО {$dv->sector->title}.xls";
+
+
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="file.xls"');
+        header('Content-Disposition: attachment; filename="'.$filename.'"');
 
         $writer->save('php://output');
 
