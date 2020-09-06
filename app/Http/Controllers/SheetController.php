@@ -151,10 +151,6 @@ class SheetController extends Controller
                     $sheet->duplicateStyle($sheet->getStyle($c.($line-1)),$c.$line.':'.$c.$line);
                     $sheet->fromArray($cellValues, null, 'A'.$line);
                 }
-// add code that show the issue here
-//                $cellValues = $sheet->rangeToArray('A'.$line.':K'.$line);
-//                $line++;
-//                $sheet->fromArray($cellValues, null, 'A'.$line);
             }
 
             $sheet->setCellValue("A".$line, $i); // № п.п
