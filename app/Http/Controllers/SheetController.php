@@ -132,8 +132,11 @@ class SheetController extends Controller
 
         $sheet = $spreadsheet->getActiveSheet();
         $sheet->setCellValue("C19", $dv->number); // Номер документа
+        $sheet->setCellValue("C22", $dv->sector->inventory_number); // Инвентарный номер
         $sheet->setCellValue("E19", (new \Carbon\Carbon($dv->date))->format('d.m.Y')); // Дата составления
-        $sheet->setCellValue("D23", 'Скоростной участок магистрали Санкт-Петербург - Москва ОПО '. $dv->sector->title); // Местонахождение объекта
+        $sheet->setCellValue("D23", $dv->sector->object_location); // Местонахождение объекта
+        $sheet->setCellValue("D24", $dv->sector->region); // Регион
+        $sheet->setCellValue("A27", $dv->sector->route_part . ' ' . $dv->sector->fio); // ПЧ + ФИО
 
         // Таблица со списком работ
         $line = 45; // номер строки
@@ -162,6 +165,10 @@ class SheetController extends Controller
 
             $i++;
         }
+
+        $line = 49 + $i;
+        $sheet->setCellValue("B".$line, $dv->sector->route_part); // Должность
+        $sheet->setCellValue("H".$line, $dv->sector->fio); // ФИО
 
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
 

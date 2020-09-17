@@ -20,6 +20,17 @@
             <dl class="row">
                 <dt class="col-sm-3">Комментарий</dt>
                 <dd class="col-sm-9">{!! nl2br(e($sector->comment)) !!}</dd>
+
+                <dt class="col-sm-3">Инвентарный номер</dt>
+                <dd class="col-sm-9">{{ $sector->inventory_number }}</dd>
+                <dt class="col-sm-3">Местонахождение объекта</dt>
+                <dd class="col-sm-9">{{ $sector->object_location }}</dd>
+                <dt class="col-sm-3">Регион</dt>
+                <dd class="col-sm-9">{{ $sector->region }}</dd>
+                <dt class="col-sm-3">ПЧ</dt>
+                <dd class="col-sm-9">{{ $sector->route_part }}</dd>
+                <dt class="col-sm-3">ФИО</dt>
+                <dd class="col-sm-9">{{ $sector->fio }}</dd>
             </dl>
         </div>
 

@@ -15,15 +15,14 @@
             </div>
         @endif
 
-        <div class="row">
-            <div class="col-lg-6">
-                <form action="{{ route('sectors.store') }}" method="post" enctype="multipart/form-data">
-                    @include('sectors.form')
+        <form action="{{ route('sectors.store') }}" method="post" enctype="multipart/form-data" class="row">
 
-                    <button type="submit" class="btn btn-primary">Добавить ОПО</button>
+            @include('sectors.form')
 
-                </form>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Добавить ОПО</button>
             </div>
-        </div>
+        </form>
+
     </div>
 @endsection

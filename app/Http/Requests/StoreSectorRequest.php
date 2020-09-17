@@ -26,6 +26,11 @@ class StoreSectorRequest extends FormRequest
         $rules = [
             'title' => 'required|unique:sectors|max:190',
             'comment' => 'nullable|string',
+            'inventory_number' => 'nullable|string|max:20',
+            'object_location' => 'nullable|string',
+            'region' => 'nullable|string',
+            'route_part' => 'nullable|string',
+            'fio' => 'nullable|string',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {

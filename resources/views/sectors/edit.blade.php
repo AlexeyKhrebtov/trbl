@@ -15,17 +15,14 @@
             </div>
         @endif
 
-        <div class="row">
-            <div class="col-lg-6">
-                <form action="{{ route('sectors.update', ['sector' => $sector]) }}" method="post" enctype="multipart/form-data">
-                    @method('PATCH')
+        <form action="{{ route('sectors.update', ['sector' => $sector]) }}" method="post" enctype="multipart/form-data" class="row">
+            @method('PATCH')
 
-                    @include('sectors.form')
+            @include('sectors.form')
 
-                    <button type="submit" class="btn btn-primary">Сохранить ОПО</button>
-
-                </form>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Сохранить ОПО</button>
             </div>
-        </div>
+        </form>
     </div>
 @endsection
