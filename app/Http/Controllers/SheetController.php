@@ -38,7 +38,7 @@ class SheetController extends Controller
                 $sheets = Sheet->whereYear('date', date('Y'))->with('details')->get();
                 break;
         }
-        ->whereYear('created_at', '2016')
+        
         return view('sheets.index', compact('sheets', 'sectors'));
     }
 
