@@ -22,7 +22,23 @@ class SheetController extends Controller
     public function index()
     {
         $sectors = Sector::all();
-        $sheets = Sheet::with('details')->get();
+        //$sheets = Sheet::with('details')->get();
+        $sheets = [];
+        // Какой год использовать для фильтрации (по-умолчанию текущий)
+        $year = $request->input('year', date('Y'));
+        
+        switch ($year) {
+            case 'all':
+                $sheets = Sheet::with('details')->get();
+                break;
+            case 2020:2021:2022:2023:
+                $sheets = Sheet->whereYear('date', $year)->with('details')->get();
+                break;
+            default:
+                $sheets = Sheet->whereYear('date', date('Y'))->with('details')->get();
+                break;
+        }
+        ->whereYear('created_at', '2016')
         return view('sheets.index', compact('sheets', 'sectors'));
     }
 
