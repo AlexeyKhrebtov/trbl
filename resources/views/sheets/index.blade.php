@@ -18,7 +18,7 @@
             <div class="col-6">
                 <div class="btn-group" role="group" aria-label="Basic example">
                 @foreach ($year_list as $y)
-                    <a href="/sheets?year={{ $y }}" class="btn @if ($y == $year) btn-secondary @endif">{{ $y }}</a>
+                    <a href="/sheets?year={{ $y }}" class="btn @if ($y == $year) btn-primary @else btn-secondary @endif">{{ $y }}</a>
                 @endforeach
                 </div>
             </div>
