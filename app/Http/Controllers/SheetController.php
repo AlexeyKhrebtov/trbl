@@ -26,23 +26,19 @@ class SheetController extends Controller
         $sheets = [];
         // Какой год использовать для фильтрации (по-умолчанию текущий)
         $year = $request->input('year', date('Y'));
-        
-        switch ($year) {
-            case 'all':
-                $sheets = Sheet::with('details')->get();
-                break;
-            case 2020:
-            case 2021:
-            case 2022:
-            case 2023:                
-                $sheets = Sheet::whereYear('date', $year)->with('details')->get();
-                break;
-            default:
-                $sheets = Sheet::whereYear('date', date('Y'))->with('details')->get();
-                break;
+        $year_list = [2020, 2021, 2022, 'all'];
+        if ($year == 'all') {
+            $sheets = Sheet::with('details')->get();
+        }
+        elseif (in_array($year, $year_list)) {
+             $sheets = Sheet::whereYear('date', $year)->with('details')->get();
+        }
+        else {
+            $year = date('Y');
+            $sheets = Sheet::whereYear('date', $year)->with('details')->get();
         }
         
-        return view('sheets.index', compact('sheets', 'sectors'));
+        return view('sheets.index', compact('sheets', 'sectors', 'year', 'year_list'));
     }
 
     /**
