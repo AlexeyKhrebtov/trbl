@@ -10,6 +10,12 @@
                 <a href="{{ route('sheets.create') }}" class="btn btn-light float-right"><i class="fa fa-plus text-success"></i> Добавить ДВ</a>
             </div>
         </div>
+        
+        <div class="row">
+            <div class="col-6">
+            {{ request()->query('year') }} 
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-sm-3 mb-4">
