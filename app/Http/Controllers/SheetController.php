@@ -32,10 +32,10 @@ class SheetController extends Controller
                 $sheets = Sheet::with('details')->get();
                 break;
             case 2020:
-                $sheets = Sheet->whereYear('date', $year)->with('details')->get();
+                $sheets = Sheet::whereYear('date', $year)->with('details')->get();
                 break;
             default:
-                $sheets = Sheet->whereYear('date', date('Y'))->with('details')->get();
+                $sheets = Sheet::whereYear('date', date('Y'))->with('details')->get();
                 break;
         }
         
