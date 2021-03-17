@@ -13,7 +13,7 @@
         
         <div class="row">
             <div class="col-6">
-            {{ request()->query('year') or '2021' }} 
+            {{ request()->query('year') ?? '2021' }} 
             </div>
         </div>
 
