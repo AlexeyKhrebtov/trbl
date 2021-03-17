@@ -31,7 +31,7 @@ class SheetController extends Controller
             case 'all':
                 $sheets = Sheet::with('details')->get();
                 break;
-            case 2020:2021:2022:2023:
+            case 2020:
                 $sheets = Sheet->whereYear('date', $year)->with('details')->get();
                 break;
             default:
