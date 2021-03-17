@@ -19,7 +19,7 @@ class SheetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $sectors = Sector::all();
         //$sheets = Sheet::with('details')->get();
