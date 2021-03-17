@@ -13,7 +13,14 @@
         
         <div class="row">
             <div class="col-6">
-            {{ request()->query('year') ?? '2021' }} 
+                <p>Показаны ведомости за <strong>{{ $year }}</strong> год.</p>
+            </div>
+            <div class="col-6">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                @foreach ($year_list as $y)
+                    <a href="/sheets?year={{ $y }}" class="btn @if ($y == $year) btn-secondary @endif">{{ $y }}</a>
+                @endforeach
+                </div>
             </div>
         </div>
 
