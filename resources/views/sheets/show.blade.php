@@ -21,14 +21,14 @@
             <div class="row">
                 <div class="col-md-4">
                     <dl class="row">
-                        <dt class="col-sm-3">Номер</dt>
-                        <dd class="col-sm-9">{{ $sheet->number }}</dd>
-                        <dt class="col-sm-3">Дата</dt>
-                        <dd class="col-sm-9">{{ \Carbon\Carbon::parse($sheet->date)->format('d.m.Y') }}</dd>
-                        <dt class="col-sm-3">Участок</dt>
-                        <dd class="col-sm-9"><a href="{{route('sectors.show', $sheet->sector_id)}}">{{ $sheet->sector->title }} &nbsp; <i class="fas fa-external-link-alt"></i></a></dd>
-                        <dt class="col-sm-3">Статус</dt>
-                        <dd class="col-sm-9">{{ $sheet->status }}</dd>
+                        <dt class="col-3">Номер</dt>
+                        <dd class="col-9">{{ $sheet->number }}</dd>
+                        <dt class="col-3">Дата</dt>
+                        <dd class="col-9">{{ \Carbon\Carbon::parse($sheet->date)->format('d.m.Y') }}</dd>
+                        <dt class="col-3">Участок</dt>
+                        <dd class="col-9"><a href="{{route('sectors.show', $sheet->sector_id)}}">{{ $sheet->sector->title }} &nbsp; <i class="fas fa-external-link-alt"></i></a></dd>
+                        <dt class="col-3">Статус</dt>
+                        <dd class="col-9">{{ $sheet->status }}</dd>
                     </dl>
                     <p class="mt-2">
                         <a href="{{ route('export', $sheet) }}" target="_blank">
