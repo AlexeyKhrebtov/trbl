@@ -60,7 +60,7 @@
                                         {{ $sheet->status }}
                                         @if ($sheet->attachments_count)
                                             <p class="text-center">
-                                                <span class="badge badge-secondary" data-toggle="tooltip" data-placement="left" title="Загружено файлов">{{ $sheet->attachments_count }}</span>
+                                                <span class="badge badge-secondary" data-toggle="tooltip" data-placement="left" title="Загружено файлов"><i class="fas fa-paperclip"></i> {{ $sheet->attachments_count }}</span>
                                             </p>
                                         @endif
                                     </td>
