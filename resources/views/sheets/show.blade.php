@@ -108,7 +108,18 @@
                                         @elseif ($attach->ext == 'png' || $attach->ext == 'jpeg' || $attach->ext == 'jpg')
                                             <i class="fa fa-file-image"></i>
                                         @endif
-                                        {{ $attach->ext }}, {{ $attach->sizeForHuman }}</h6>
+                                        {{ $attach->ext }}, {{ $attach->sizeForHuman }}
+                                    </h6>
+                                    <div class="d-flex justify-content-between">
+                                        <a href="{{ $attach->link }}" class="card-link" target="_blank">Открыть</a>
+                                        <form action="{{ route('sheets.attach.remove', [$sheet->id, $attach->id]) }}"
+                                              method="post"
+                                              onSubmit="if(!confirm('Вы действительно хотите безвозвратно удалить этот файл?')){return false;}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="card-link btn btn-danger btn-sm rounded-sm" type="submit" data-toggle="tooltip" data-placement="top" title="Удалить"><i class="fa fa-trash"></i></button>
+                                        </form>
+                                    </div>
                                 </div>
                                 <div class="card-footer text-muted text-center">
                                     <span data-toggle="tooltip" data-placement="top" title="{{ $attach->created_at }}">Загружен {{ $attach->howLong }}</span>
@@ -119,12 +130,14 @@
                 </div>
             @endif
 
+            <hr>
+
             <form action="{{ route('sheets.attach', $sheet->id) }}" method="post" enctype="multipart/form-data" class="form-inline mb-3">
                 @csrf
-                <div class="form-group mr-3">
+                <div class="form-group mr-3 mb-0">
                     <label for="customFile" class="lead">Прикрепить файл</label>
                 </div>
-                <div class="form-group mx-sm-3 my-sm-3 pt-3">
+                <div class="form-group mx-3 my-sm-3 pt-3">
                     <div class="custom-file">
                         <input type="file" name="attach" required accept="image/*,application/pdf" class="custom-file-input" id="customFile">
                         <label class="custom-file-label" for="customFile" data-browse="Выбрать файл">Выбрать файл</label>

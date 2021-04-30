@@ -54,7 +54,7 @@ class Attachment extends Model
      */
     public function getLinkAttribute(): string
     {
-        return Storage::url('attach/'. $this->attributes['path']);
+        return Storage::disk('attach')->url($this->attributes['path']);
     }
 
     public function getHowLongAttribute(): string

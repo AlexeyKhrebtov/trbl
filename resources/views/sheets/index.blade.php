@@ -3,19 +3,19 @@
 @section('content')
     <div class="container">
         <div class="row mb-3">
-            <div class="col-6">
+            <div class="col-12 col-sm-6">
                 <h4 class="mt-1">Дефектные ведомости</h4>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-sm-6">
                 <a href="{{ route('sheets.create') }}" class="btn btn-light float-right"><i class="fa fa-plus text-success"></i> Добавить ДВ</a>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-6">
+
+        <div class="row mb-3">
+            <div class="col-12 col-sm-6">
                 <p>Показаны ведомости за <strong>{{ $year }}</strong> год.</p>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-sm-6">
                 <div class="btn-group" role="group" aria-label="Basic example">
                 @foreach ($year_list as $y)
                     <a href="/sheets?year={{ $y }}" class="btn @if ($y == $year) btn-primary @else btn-secondary @endif">{{ $y }}</a>
@@ -56,7 +56,14 @@
                                 <tr>
                                     <th scope="row"><a href="{{  route('sheets.show', $sheet) }}">{{ $sheet->number }}</a></th>
                                     <td>{{ \Carbon\Carbon::parse($sheet->date)->format('d.m.Y') }}</td>
-                                    <td>{{ $sheet->status }}</td>
+                                    <td>
+                                        {{ $sheet->status }}
+                                        @if ($sheet->attachments_count)
+                                            <p class="text-center">
+                                                <span class="badge badge-secondary" data-toggle="tooltip" data-placement="left" title="Загружено файлов">{{ $sheet->attachments_count }}</span>
+                                            </p>
+                                        @endif
+                                    </td>
                                     <td>
                                         @if (count($sheet->details))
                                             <ul class="list-group list-group-flush">

@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function (){
 
     Route::get('sheets/{dv}/export', 'SheetController@export')->name('export');
     Route::post('sheets/{dv}/attach', 'SheetController@attach')->name('sheets.attach');
+    Route::delete('sheets/{dv}/attach/{file}/remove', 'SheetController@removeFile')->name('sheets.attach.remove');
 
     Route::get('summaries', 'SummaryController')->name('summaries');
 });

@@ -8,6 +8,7 @@ use App\Sector;
 use App\Sheet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -31,14 +32,14 @@ class SheetController extends Controller
         $year = $request->input('year', date('Y'));
         $year_list = [2020, 2021, 2022, 'all'];
         if ($year == 'all') {
-            $sheets = Sheet::with('details')->get();
+            $sheets = Sheet::with('details')->withCount('attachments')->get();
         }
         elseif (in_array($year, $year_list)) {
-             $sheets = Sheet::whereYear('date', $year)->with('details')->get();
+             $sheets = Sheet::whereYear('date', $year)->with('details')->withCount('attachments')->get();
         }
         else {
             $year = date('Y');
-            $sheets = Sheet::whereYear('date', $year)->with('details')->get();
+            $sheets = Sheet::whereYear('date', $year)->with('details')->withCount('attachments')->get();
         }
 
         return view('sheets.index', compact('sheets', 'sectors', 'year', 'year_list'));
@@ -133,6 +134,21 @@ class SheetController extends Controller
      */
     public function destroy(Sheet $sheet)
     {
+        try {
+            if ($sheet->attachments()->count()) {
+                $files = $sheet->attachments;
+                foreach($files as $file) {
+                    if (Storage::disk('attach')->delete($file->path)) {
+                        $file->delete();
+                    }
+                    else {
+                        throw new \Exception('Не удалось удалить файл с сервера');
+                    }
+                }
+            }
+        } catch (\Exception $e) {
+            return redirect()->action('SheetController@show', $sheet)->with('warning', $e->getMessage());
+        }
         $sheet->delete();
         return redirect()->action('SheetController@index')->with('success', 'ДВ удалена');
     }
@@ -202,6 +218,8 @@ class SheetController extends Controller
     }
 
     /**
+     * Загрузить файл для ведомости
+     *
      * @param Sheet $dv ведомость
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
@@ -238,5 +256,32 @@ class SheetController extends Controller
         $dv->attachments()->save($attach);
 
         return redirect()->action('SheetController@show', $dv)->with('success', 'Файл прикреплен');
+    }
+
+    /**
+     * Удаление файла
+     *
+     * @param Sheet $dv
+     * @param Attachment $file
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function removeFile(Sheet $dv, Attachment $file, Request $request): \Illuminate\Http\RedirectResponse
+    {
+        if ($file->attachable_id != $dv->id) {
+            return redirect()->action('SheetController@show', $dv)->with('error', 'Не удалось удалить указанный файл!');
+        }
+
+        try {
+            if (Storage::disk('attach')->delete($file->path)) {
+                $file->delete();
+            }
+            else {
+                throw new \Exception('Не удалось удалить файл с сервера');
+            }
+        } catch (\Exception $e) {
+            return redirect()->action('SheetController@show', $dv)->with('error', $e->getMessage());
+        }
+        return redirect()->action('SheetController@show', $dv)->with('success', 'Файл удален');
     }
 }

@@ -41,6 +41,16 @@
                 </div>
             @endif
 
+            @if(session()->get('error') || session()->get('danger'))
+                <div class="alert alert-danger alert-dismissible fade show container" role="alert">
+                    {{ session()->get('error') }}
+                    {{ session()->get('danger') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
             @yield('content')
         </main>
 
