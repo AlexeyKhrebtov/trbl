@@ -97,7 +97,7 @@
                                 @if ($attach->ext == 'pdf')
                                     <img src="{{ asset('images/icons/pdf.svg') }}" alt="{{ $attach->filename }}" class="card-img-top w-50">
                                 @else
-                                    <img src="{{ $attach->link }}" alt="{{ $attach->filename }}" class="card-img-top img-thumbnail-">
+                                    <img src="{{ $attach->link }}" alt="{{ $attach->filename }}" loading="lazy" class="card-img-top img-thumbnail-">
                                 @endif
                                 </a>
                                 <div class="card-body">
