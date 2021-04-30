@@ -11,12 +11,11 @@
             </div>
             <div class="col-6 col-sm-4">
                 <a href="{{ route('sheets.index') }}" class="btn btn-outline-info mb-2 bg-white" role="button">
-                    <i class="fas fa-undo"></i>
-                    <span style="line-height: 1.3;">Вернуться к списку ДВ</span>
+                    <i class="fas fa-undo"></i> Вернуться к списку ДВ
                 </a>
             </div>
             <div class="col-6 col-sm-4">
-                <a href="{{ route('sheets.edit', $sheet->id) }}" class="btn btn-outline-dark mb-2"  role="button"><i class="fas fa-edit"></i> <span style="line-height: 1.3;">Редактировать ДВ</span></a>
+                <a href="{{ route('sheets.edit', $sheet->id) }}" class="btn btn-outline-dark mb-2"  role="button"><i class="fas fa-edit"></i>  Редактировать ДВ</a>
             </div>
         </div>
 
