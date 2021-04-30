@@ -55,3 +55,26 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 const app = new Vue({
     el: '#app',
 });
+
+
+// jQuery
+$(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+
+    // Прикрепление файла в дефектных ведомостях
+    $('#customFile').on('change',function(){
+        //get the file name
+        var fileName = $(this).val().split(/(\\|\/)/g).pop();
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+    });
+
+    // Наведение на загруженные файлы в дефектных ведомостях
+    $( ".card.sheets-attach" ).hover(
+        function() {
+            $(this).addClass('shadow-lg');
+        }, function() {
+            $(this).removeClass('shadow-lg');
+        }
+    );
+});

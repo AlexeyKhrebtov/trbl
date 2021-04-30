@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function (){
     ]);
 
     Route::get('sheets/{dv}/export', 'SheetController@export')->name('export');
+    Route::post('sheets/{dv}/attach', 'SheetController@attach')->name('sheets.attach');
 
     Route::get('summaries', 'SummaryController')->name('summaries');
 });

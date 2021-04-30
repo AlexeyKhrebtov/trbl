@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container">
         <h1>{{ $sheet->number }}</h1>
 
@@ -68,6 +69,74 @@
                 </div>
 
             </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                @if (count($errors) > 0)
+                    <div class = "alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        <h3>Прикрепленные документы</h3>
+        <div class="shadow-sm p-3 mb-5 bg-white rounded">
+            @if ($sheet->attachments)
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-3">
+                    @foreach ($sheet->attachments as $attach)
+                        <div class="col mb-4">
+                            <div class="card sheets-attach">
+                                {{-- иконки тут https://freeicons.io/icon-list/vector-file-types-icons --}}
+                                <a href="{{ $attach->link }}" target="_blank" class="text-center">
+                                @if ($attach->ext == 'pdf')
+                                    <img src="{{ asset('images/icons/pdf.svg') }}" alt="{{ $attach->filename }}" class="card-img-top w-50">
+                                @else
+                                    <img src="{{ $attach->link }}" alt="{{ $attach->filename }}" class="card-img-top img-thumbnail-">
+                                @endif
+                                </a>
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ $attach->filename }}</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">
+                                        @if ($attach->ext == 'pdf')
+                                            <i class="fa fa-file-pdf"></i>
+                                        @elseif ($attach->ext == 'png' || $attach->ext == 'jpeg' || $attach->ext == 'jpg')
+                                            <i class="fa fa-file-image"></i>
+                                        @endif
+                                        {{ $attach->ext }}, {{ $attach->sizeForHuman }}</h6>
+                                </div>
+                                <div class="card-footer text-muted text-center">
+                                    <span data-toggle="tooltip" data-placement="top" title="{{ $attach->created_at }}">Загружен {{ $attach->howLong }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
+            <form action="{{ route('sheets.attach', $sheet->id) }}" method="post" enctype="multipart/form-data" class="form-inline mb-3">
+                @csrf
+                <div class="form-group mr-3">
+                    <label for="customFile" class="lead">Прикрепить файл</label>
+                </div>
+                <div class="form-group mx-sm-3 my-sm-3 pt-3">
+                    <div class="custom-file">
+                        <input type="file" name="attach" required accept="image/*,application/pdf" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile" data-browse="Выбрать файл">Выбрать файл</label>
+                    </div>
+                    <small class="form-text text-muted">jpeg, pdf (max: 2mb)</small>
+                </div>
+
+                <button type="submit" class="btn btn-success mb-2">
+                    <i class="fa fa-file-upload text-light mr-1"></i>
+                    Загрузить
+                </button>
+            </form>
         </div>
 
         <h3>Добавить оборудование в ДВ</h3>

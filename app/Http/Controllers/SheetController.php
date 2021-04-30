@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Attachment;
 use App\Http\Requests\StoreSheetRequest;
 use App\Sector;
 use App\Sheet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -17,6 +19,7 @@ class SheetController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -37,7 +40,7 @@ class SheetController extends Controller
             $year = date('Y');
             $sheets = Sheet::whereYear('date', $year)->with('details')->get();
         }
-        
+
         return view('sheets.index', compact('sheets', 'sectors', 'year', 'year_list'));
     }
 
@@ -196,5 +199,44 @@ class SheetController extends Controller
         $writer->save('php://output');
 
         return 'ok';
+    }
+
+    /**
+     * @param Sheet $dv ведомость
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function attach(Sheet $dv, Request $request): \Illuminate\Http\RedirectResponse
+    {
+        if (!$request->file('attach')) {
+            return redirect()->action('SheetController@show', $dv)->with('warning', 'Не был передан файл для загрузки');
+        }
+
+        /*
+         *  php_value post_max_size=15M
+            php_value upload_max_filesize=15M
+         */
+
+        $request->validate([
+           'attach' => 'required|file|max:2048|mimes:jpeg,png,pdf'
+        ]);
+
+        $ext = $request->file('attach')->getClientOriginalExtension();
+        $size = $request->file('attach')->getSize();
+        $filename = $request->file('attach')->getClientOriginalName();
+
+        // 20210430-0816-zj8bq5vv3i4i.jpeg
+        $attach_filename = Carbon::now()->format('Ymd-hi') .'-'. Str::lower(Str::random(12)) .'.'. $ext;
+        $attach_path = $request->file('attach')->storeAs('',$attach_filename, 'attach');
+
+        $attach = new Attachment;
+        $attach->filename = $filename;
+        $attach->size = $size;
+        $attach->ext = $ext;
+        $attach->path = $attach_path;
+
+        $dv->attachments()->save($attach);
+
+        return redirect()->action('SheetController@show', $dv)->with('success', 'Файл прикреплен');
     }
 }
