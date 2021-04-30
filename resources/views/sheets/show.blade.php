@@ -139,7 +139,7 @@
                 </div>
                 <div class="form-group mx-3 my-sm-3 pt-3">
                     <div class="custom-file">
-                        <input type="file" name="attach" required accept="image/*,application/pdf,capture=camera" capture="user" class="custom-file-input" id="customFile">
+                        <input type="file" name="attach" required accept="image/*,application/pdf" class="custom-file-input" id="customFile">
                         <label class="custom-file-label" for="customFile" data-browse="Выбрать файл">Выбрать файл</label>
                     </div>
                     <small class="form-text text-muted">jpeg, pdf (max: 8mb)</small>
