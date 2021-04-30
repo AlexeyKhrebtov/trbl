@@ -142,7 +142,7 @@
                         <input type="file" name="attach" required accept="image/*,application/pdf" class="custom-file-input" id="customFile">
                         <label class="custom-file-label" for="customFile" data-browse="Выбрать файл">Выбрать файл</label>
                     </div>
-                    <small class="form-text text-muted">jpeg, pdf (max: 2mb)</small>
+                    <small class="form-text text-muted">jpeg, pdf (max: 8mb)</small>
                 </div>
 
                 <button type="submit" class="btn btn-success mb-2">

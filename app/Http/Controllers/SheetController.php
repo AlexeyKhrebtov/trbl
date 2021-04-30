@@ -236,7 +236,7 @@ class SheetController extends Controller
          */
 
         $request->validate([
-           'attach' => 'required|file|max:2048|mimes:jpeg,png,pdf'
+           'attach' => 'required|file|max:8000|mimes:jpeg,png,pdf'
         ]);
 
         $ext = $request->file('attach')->getClientOriginalExtension();
