@@ -32,7 +32,10 @@
                         <dt class="col-4">Статус</dt>
                         <dd class="col-8">{{ $sheet->status }}</dd>
                         <dt class="col-4">Информация</dt>
-                        <dd class="col-8"><p><mark>{!! nl2br(e($sheet->info)) !!}</mark></p></dd>
+                        <dd class="col-8">@if ($sheet->info)
+                                <p><mark>{!! nl2br(e($sheet->info)) !!}</mark></p>
+                            @endif
+                        </dd>
                     </dl>
                     <p class="mt-2">
                         <a href="{{ route('export', $sheet) }}" target="_blank">

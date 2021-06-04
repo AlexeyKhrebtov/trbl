@@ -70,7 +70,7 @@
                                             @foreach($sheet->details as $detail)
                                                 <li class="list-group-item">
                                                     <div>{{ $detail->name }}</div>
-                                                    <small class="text-muted">{{ $detail->comment }}</small>
+                                                    <small class="text-muted">{!! nl2br(e($detail->comment)) !!}</small>
                                                 </li>
                                             @endforeach
                                             </ul>
