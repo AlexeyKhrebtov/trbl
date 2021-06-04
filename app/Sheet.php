@@ -34,7 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Sheet extends Model
 {
-    protected $fillable = ['number', 'date', 'sector_id', 'status'];
+    protected $fillable = ['number', 'date', 'sector_id', 'status', 'info'];
 
     protected $attributes = [
         'status' => 10,

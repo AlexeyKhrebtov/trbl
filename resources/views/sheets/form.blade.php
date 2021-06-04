@@ -35,6 +35,13 @@
             @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
     </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="info">Информация</label>
+            <textarea name="info" class="form-control" id="info" rows="4">{{ $sheet->info }}</textarea>
+        </div>
+    </div>
 </div>
 
 @csrf

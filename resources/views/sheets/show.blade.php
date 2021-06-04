@@ -23,14 +23,16 @@
             <div class="row">
                 <div class="col-md-4">
                     <dl class="row">
-                        <dt class="col-3">Номер</dt>
-                        <dd class="col-9">{{ $sheet->number }}</dd>
-                        <dt class="col-3">Дата</dt>
-                        <dd class="col-9">{{ \Carbon\Carbon::parse($sheet->date)->format('d.m.Y') }}</dd>
-                        <dt class="col-3">Участок</dt>
-                        <dd class="col-9"><a href="{{route('sectors.show', $sheet->sector_id)}}">{{ $sheet->sector->title }} &nbsp; <i class="fas fa-external-link-alt"></i></a></dd>
-                        <dt class="col-3">Статус</dt>
-                        <dd class="col-9">{{ $sheet->status }}</dd>
+                        <dt class="col-4">Номер</dt>
+                        <dd class="col-8">{{ $sheet->number }}</dd>
+                        <dt class="col-4">Дата</dt>
+                        <dd class="col-8">{{ \Carbon\Carbon::parse($sheet->date)->format('d.m.Y') }}</dd>
+                        <dt class="col-4">Участок</dt>
+                        <dd class="col-8"><a href="{{route('sectors.show', $sheet->sector_id)}}">{{ $sheet->sector->title }} &nbsp; <i class="fas fa-external-link-alt"></i></a></dd>
+                        <dt class="col-4">Статус</dt>
+                        <dd class="col-8">{{ $sheet->status }}</dd>
+                        <dt class="col-4">Информация</dt>
+                        <dd class="col-8"><p><mark>{!! nl2br(e($sheet->info)) !!}</mark></p></dd>
                     </dl>
                     <p class="mt-2">
                         <a href="{{ route('export', $sheet) }}" target="_blank">

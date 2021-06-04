@@ -68,11 +68,18 @@
                                         @if (count($sheet->details))
                                             <ul class="list-group list-group-flush">
                                             @foreach($sheet->details as $detail)
-                                                <li class="list-group-item">{{ $detail->name }}</li>
+                                                <li class="list-group-item">
+                                                    <div>{{ $detail->name }}</div>
+                                                    <small class="text-muted">{{ $detail->comment }}</small>
+                                                </li>
                                             @endforeach
                                             </ul>
                                         @else
                                             <p class="bg-warning text-dark text-center mb-0">Оборудование не заполнено!</p>
+                                        @endif
+
+                                        @if ($sheet->info)
+                                            <p class="mt-3"><mark>{!! nl2br(e($sheet->info)) !!}</mark></p>
                                         @endif
                                     </td>
                                 </tr>

@@ -28,6 +28,7 @@ class StoreSheetRequest extends FormRequest
             'date' => 'required|date',
             'sector_id' => 'required|integer|numeric|exists:sectors,id',
             'status' => 'required|integer|numeric',
+            'info' => 'nullable'
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
