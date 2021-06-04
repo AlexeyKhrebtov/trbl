@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 
+// Регистрация закрыта
 Auth::routes(['register' => false]);
 
 Route::middleware(['auth'])->group(function (){
