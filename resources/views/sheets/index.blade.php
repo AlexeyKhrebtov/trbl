@@ -45,7 +45,7 @@
                                     <th scope="col">Номер ДВ</th>
                                     <th scope="col">Дата</th>
                                     <th scope="col">Статус</th>
-                                    <th scope="col">Список наименований</th>
+                                    <th scope="col" style="min-width: 320px;">Список наименований</th>
                                 </tr>
                                 </thead>
                                 <tbody>
